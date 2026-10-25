@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- pokepets://celebrate, pokepets://fail, … so scripts, git hooks and AI agents can make Pikachu react. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>PokePets hooks</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pokepets</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

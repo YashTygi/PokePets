@@ -1,0 +1,12 @@
+#!/bin/sh
+# Relaunch PokePets with a demo or dev flags, to see a feature right away.
+#   bin/try <demo> [pet|gengar] [more flags…]
+#   bin/try fly gengar                 Gengar flies about
+#   bin/try dock pet                   Pikachu walks over the Dock
+#   bin/try - gengar -PokeGhostHour YES    no demo, just flags ("-" = none)
+# The second word picks who's out (only one Pokémon is out at a time; it must have hatched).
+demo=$1; who=$2
+[ $# -gt 0 ] && shift; [ $# -gt 0 ] && shift
+[ "$demo" = "-" ] && demo=""
+pkill -x PokePets; sleep 1
+open -a "$HOME/Applications/PokePets.app" --args ${demo:+-PokeDemo "$demo"} ${who:+-party.out "$who"} "$@"

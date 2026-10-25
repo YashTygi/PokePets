@@ -1,0 +1,10 @@
+#!/bin/sh
+# Make your Pokémon react from the terminal, scripts, git hooks or AI agents.
+#   pokepets celebrate   build passed / tests green  → joyous, Thunder Shock, happy pose
+#   pokepets fail        build failed                → faints for a few seconds
+#   pokepets done        a long job / agent finished → joyous, hearts
+#   pokepets hello       just say hi
+#   pokepets focus       a Focus turned on           → sleeps, stays quiet
+#   pokepets unfocus     the Focus ended             → wakes up
+# Example:  make && pokepets celebrate || pokepets fail
+exec open -g "pokepets://${1:-hello}"
