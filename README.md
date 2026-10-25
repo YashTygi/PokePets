@@ -20,6 +20,9 @@ And when you ask, they clear out the junk for you.
 
 <sub>Gengar on a real desktop (still from the teaser).</sub>
 
+**Install:** paste `curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh` into Terminal,
+or [download the DMG](#download-the-dmg).
+
 </div>
 
 ---
@@ -205,7 +208,49 @@ option it is considering.
 
 ## Install
 
-**Requirements:** macOS 14 (Sonoma) or later, and Xcode 16 or later.
+**Requirements:** macOS 14 (Sonoma) or later. Apple silicon and Intel Macs both work.
+
+### One command (recommended)
+
+Paste this into Terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh
+```
+
+It downloads [`PokePets.dmg`](docs/downloads/PokePets.dmg) and its checksum from this repository,
+**stops if the SHA-256 doesn't match**, copies `PokePets.app` into `/Applications` (or `~/Applications` if
+that isn't writable), and opens it. It never uses `sudo`, and it leaves your shell and login items alone.
+An older copy is replaced and your Pokémon are kept. [Read the script first](docs/install.sh); it is about 80 lines.
+
+There is no "can't verify" warning this way. PokéPets is free, so Apple hasn't notarized it, and macOS
+stops anything a *browser* downloads that isn't notarized. A file fetched with `curl` never gets that mark,
+and the script clears it from the installed copy as well. The checksum is the check that remains.
+
+To remove it again (your Pokémon are kept; add `--purge` to remove them too):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/uninstall.sh | sh
+```
+
+### Download the DMG
+
+Grab [`PokePets.dmg`](docs/downloads/PokePets.dmg) (about 7 MB, with its [SHA-256](docs/downloads/PokePets.dmg.sha256)).
+Because a browser marked it as downloaded from the internet, **macOS will stop it once**. This is what to do:
+
+1. Open `PokePets.dmg`. macOS says **“PokePets.dmg” Not Opened: Apple could not verify it is free of malware**.
+   Click **Done**, *not* Move to Bin (it says Move to Trash on a US-English Mac).
+2. Open **Apple menu → System Settings → Privacy & Security**. Scroll down to **Security**, find
+   *“PokePets.dmg” was blocked to protect your Mac*, and click **Open Anyway**. Enter your Mac password or use Touch ID.
+3. macOS asks one last time. Click **Open** (or **Open Anyway**). Never Move to Bin.
+4. Drag **PokePets** into Applications and open it. If macOS stops the app itself the same way, repeat
+   steps 2 and 3 once. After that it opens normally.
+
+Prefer Terminal? `xattr -dr com.apple.quarantine /Applications/PokePets.app` clears the mark on the app.
+
+### Build from source
+
+You need Xcode 16 or later.
 
 ```bash
 git clone https://github.com/YashTygi/PokePets.git
@@ -227,7 +272,14 @@ open ~/Applications/PokePets.app
 > **Why `~/Applications`, and why sign with a team?**
 > macOS only offers the notification prompt to apps that live in an Applications folder, so the project
 > builds straight there. And a real signing identity (a free personal team is fine) keeps your Accessibility
-> and Automation grants across rebuilds; ad-hoc signing makes macOS forget them every time.
+> and Automation grants across rebuilds; ad-hoc signing makes macOS forget them every time. (The DMG is
+> ad-hoc signed, so after an update you grant them once more.)
+
+### Making a release
+
+`bin/make-dmg.sh` builds a universal Release app, packs it into `docs/downloads/PokePets.dmg` and writes
+`PokePets.dmg.sha256` next to it. The installer downloads exactly those two files, so commit them together.
+It builds in a temporary folder, so it never touches the copy in your `~/Applications`.
 
 ### First launch
 
@@ -298,8 +350,9 @@ invisible in Activity Monitor.
   The **Why?** tab shows those scores live.
 - **Event-driven senses.** Battery and charger (`IOPS` notifications), Wi-Fi (`NWPathMonitor`), heat
   (thermal-state notifications), `~/Downloads` (a file-system watch), and mounted disk images (workspace
-  notifications) all wake the app only when something changes. The one check that does run on a timer is
-  an idle check every 20 s, which drops to every 2 s only while you are away.
+  notifications) all wake the app only when something changes. Two cheap checks do run on timers: an idle
+  check every 20 s (every 2 s while you are away), and, while *Walks over your apps* is on, a look every
+  2 s at whether the app in front is full screen, so the Pokémon can slip behind a video.
 - **One engine, many species.** `Companion` holds everything shared (needs, growth, the brain, feeding,
   petting, hooks). A species is a small subclass that adds its sprites, moves, ability and evolution rules.
   Adding a Pokémon means adding a subclass and a sprite sheet.
@@ -337,10 +390,16 @@ PokePets/
 │   ├── *-anim.xml, *.png       # SpriteCollab sheets, portraits and animation maps
 │   └── credits.json            # sprite artists, shown in Settings › Credits
 ├── bin/
+│   ├── make-dmg.sh             # build the Release app into docs/downloads/PokePets.dmg
+│   ├── build-site-sprites.py   # regenerate the website's sprite data
 │   ├── try                     # relaunch with a demo
 │   ├── pokepets                # make your Pokémon react from a script
 │   ├── import-sprites.swift    # import a Pokémon and its shiny from SpriteCollab
 │   └── make-icon.swift         # draws the app icon
+├── docs/                       # the website, plus the installer and the download
+│   ├── index.html, assets/       # the site (static; GitHub Pages can serve it from /docs)
+│   ├── install.sh, uninstall.sh  # the one-line installer and its undo
+│   └── downloads/                # PokePets.dmg and PokePets.dmg.sha256
 └── CREDITS.md
 ```
 

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PokéPets · Pokémon that live on your Mac desktop</title>
+  <meta name="description" content="A native macOS menu bar app. Hatch an Egg and a Pokémon moves onto your desktop: it climbs your files, gets hungry, levels up, evolves, and clears out files when you ask. Free, fan-made, no dependencies.">
+  <meta property="og:title" content="PokéPets: Pokémon that live on your Mac desktop">
+  <meta property="og:description" content="They roam your screen, climb your files, grow up and evolve. Gengar will also lick your screen.">
+  <meta property="og:image" content="hero.jpg">
+  <meta name="theme-color" content="#f7f2e7">
+  <link rel="icon" href="assets/icon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Geist+Mono:wght@400;500&family=Pixelify+Sans:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="grid">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="PokéPets, back to the top"><img src="icon.png" width="28" height="28" alt="">PokéPets</a>
+  <nav class="navLinks" aria-label="Sections">
+    <a href="#stage">Try it</a>
+    <a href="#party">Party</a>
+    <a href="#life">Day to day</a>
+    <a href="#control">Control</a>
+    <a href="#hooks">Scripting</a>
+    <a href="#install">Install</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="navActions">
+    <button class="companion" id="companionToggle" type="button" aria-pressed="true" title="A Pokémon follows you down this page. Click to send it back to its ball.">
+      <span class="cmp-dot" aria-hidden="true"></span><span class="cmp-label">Companion on</span>
+    </button>
+    <a class="button" href="https://github.com/YashTygi/PokePets">GitHub</a>
+    <a class="button primary" href="#install">Install</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ------------------------------------------------------------ hero -->
+<section class="hero" id="top">
+  <div class="heroCopy">
+    <span class="eyebrow"><i class="dot"></i>Native macOS · Menu bar app · Fan project</span>
+    <h1>Your desktop, with <mark>company.</mark></h1>
+  </div>
+  <div class="heroSide">
+    <p class="lede">PokéPets puts a Pokémon on your Mac. It walks the Dock, climbs the files on your desktop, gets hungry, grows up and evolves. Ask nicely and it deletes things for you, into the Trash, with an attack.</p>
+    <div class="heroActions">
+      <a class="button primary" href="#stage" data-focus-stage>Play with the sample</a>
+      <a class="button" href="#install">Install it</a>
+    </div>
+    <dl class="proof">
+      <div><dt>2</dt><dd>lines to raise</dd></div>
+      <div><dt>0</dt><dd>dependencies</dd></div>
+      <div><dt>Trash</dt><dd>never erase</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ the sample -->
+<section class="stageWrap" aria-labelledby="stageTitle">
+  <div class="stage" id="stage">
+    <div class="stageHead">
+      <div>
+        <h2 id="stageTitle">A sample desktop</h2>
+        <p>Pick a Pokémon, then ask it for something. Same sprites and the same move list as the app. Everything is unlocked here; in the app, moves come with levels.</p>
+      </div>
+      <span class="label tag">Web sample · not the app</span>
+    </div>
+
+    <div class="app">
+      <div class="appBar">
+        <span class="who"><i class="dot"></i><span id="whoLine">Gengar · out on the desktop</span></span>
+        <span class="status" role="status"><span id="status">Gengar is hanging about</span></span>
+      </div>
+
+      <div class="stageGrid">
+        <!-- the desktop -->
+        <div class="desk" id="desk" aria-label="Sample desktop. Use the controls beside it to ask the Pokémon for something.">
+          <div class="wall" aria-hidden="true"></div>
+
+          <div class="menubar" aria-hidden="true">
+            <span class="mb-l"><b>Desktop</b><span>File</span><span>Edit</span><span>View</span></span>
+            <span class="mb-r">
+              <span class="m-heat" hidden>HOT</span>
+              <svg class="menu-ball" viewBox="0 0 16 16" width="15" height="15"><circle cx="8" cy="8" r="7" fill="#fff"/><path d="M1 8a7 7 0 0 1 14 0z" fill="#e53b2c"/><path d="M1 8h14" stroke="#181010" stroke-width="1.6"/><circle cx="8" cy="8" r="2.3" fill="#fff" stroke="#181010" stroke-width="1.4"/><circle cx="8" cy="8" r="7" fill="none" stroke="#181010" stroke-width="1.2"/></svg>
+              <i class="m-cam" data-state="off"></i>
+              <svg class="m-wifi" data-state="on" viewBox="0 0 16 12" width="15" height="11"><path d="M1 4.2a10 10 0 0 1 14 0M3.3 6.8a6.6 6.6 0 0 1 9.4 0M5.7 9.3a3.2 3.2 0 0 1 4.6 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="currentColor"/></svg>
+              <span class="m-batt" data-state="ok"><span class="pct">86%</span><span class="cell"><i></i></span></span>
+              <span class="clock">Sat 9:41</span>
+            </span>
+          </div>
+
+          <div class="window" id="win" aria-hidden="true">
+            <div class="wbar"><i></i><i></i><i></i><span>notes.txt</span></div>
+            <div class="wbody"><s style="width:78%"></s><s style="width:92%"></s><s style="width:64%"></s><s style="width:85%"></s><s style="width:40%"></s></div>
+          </div>
+
+          <div class="files">
+            <button class="file" type="button" data-id="dmg" data-name="installer-v2.dmg" aria-label="installer-v2.dmg, 812 MB"><span class="ficon dmg"><em>DMG</em></span><span class="fname">installer-v2.dmg</span></button>
+            <button class="file" type="button" data-id="pdf" data-name="report_FINAL(3).pdf" aria-label="report_FINAL(3).pdf"><span class="ficon pdf"><em>PDF</em></span><span class="fname">report_FINAL(3).pdf</span></button>
+            <button class="file" type="button" data-id="png" data-name="Screenshot 9.41.png" aria-label="Screenshot 9.41.png"><span class="ficon png"><em>PNG</em></span><span class="fname">Screenshot 9.41.png</span></button>
+          </div>
+
+          <div class="dock" aria-hidden="true">
+            <i style="--c:#d9a441"></i><i style="--c:#5f8f78"></i><i style="--c:#6f86c9"></i><i style="--c:#c9674f"></i><i style="--c:#8d6fb3"></i><i style="--c:#5d98a8"></i>
+            <b></b>
+            <span class="trash"><u></u></span>
+          </div>
+        </div>
+
+        <!-- the controls -->
+        <div class="console">
+          <div class="party" id="party-row" role="group" aria-label="Choose a Pokémon">
+            <div class="line">
+              <span class="label">Pichu line</span>
+              <div class="forms">
+                <button type="button" class="form" data-form="pichu" aria-pressed="false" aria-label="Pichu"><img src="assets/party/pichu.png" width="40" height="40" alt=""></button>
+                <button type="button" class="form" data-form="pikachu" aria-pressed="false" aria-label="Pikachu"><img src="assets/party/pikachu.png" width="40" height="40" alt=""></button>
+                <button type="button" class="form" data-form="raichu" aria-pressed="false" aria-label="Raichu"><img src="assets/party/raichu.png" width="40" height="40" alt=""></button>
+                <button type="button" class="form" data-form="raichu-alola" aria-pressed="false" aria-label="Alolan Raichu"><img src="assets/party/raichu-alola.png" width="40" height="40" alt=""></button>
+              </div>
+            </div>
+            <div class="line">
+              <span class="label">Gastly line</span>
+              <div class="forms">
+                <button type="button" class="form" data-form="gastly" aria-pressed="false" aria-label="Gastly"><img src="assets/party/gastly.png" width="40" height="40" alt=""></button>
+                <button type="button" class="form" data-form="haunter" aria-pressed="false" aria-label="Haunter"><img src="assets/party/haunter.png" width="40" height="40" alt=""></button>
+                <button type="button" class="form" data-form="gengar" aria-pressed="true" aria-label="Gengar"><img src="assets/party/gengar.png" width="40" height="40" alt=""></button>
+              </div>
+              <div class="forms soonForms" role="group" aria-label="Planned, not built yet">
+                <span class="form locked" title="Typhlosion: planned" aria-label="Typhlosion, planned">?</span>
+                <span class="form locked" title="Pidgeot: planned" aria-label="Pidgeot, planned">?</span>
+                <span class="form locked" title="Alakazam: planned" aria-label="Alakazam, planned">?</span>
+                <span class="form locked" title="Lapras: planned" aria-label="Lapras, planned">?</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabs" id="tabs" role="tablist" aria-label="What to ask for">
+            <button type="button" role="tab" id="t-moves" aria-selected="true" aria-controls="tab-moves">Moves</button>
+            <button type="button" role="tab" id="t-mac" aria-selected="false" aria-controls="tab-mac" tabindex="-1">Your Mac</button>
+            <button type="button" role="tab" id="t-hooks" aria-selected="false" aria-controls="tab-hooks" tabindex="-1">Hooks</button>
+          </div>
+
+          <div class="panel" id="tab-moves" role="tabpanel" aria-labelledby="t-moves">
+            <span class="label">Its own moves · <span id="line-tag">Ghost / Poison</span></span>
+            <div class="moves" id="sigMoves"></div>
+            <span class="label">Everyday</span>
+            <div class="chips" id="dayMoves"></div>
+          </div>
+
+          <div class="panel" id="tab-mac" role="tabpanel" aria-labelledby="t-mac" hidden>
+            <span class="label">Pretend things happen to the Mac</span>
+            <div class="moves">
+              <button type="button" class="move" data-mac="charger" aria-pressed="false"><span class="mi" data-pix="sparkle" data-scale="3"></span><span class="mt"><b>Plug in the charger</b><small>It soaks up the power</small></span></button>
+              <button type="button" class="move" data-mac="battery" aria-pressed="false"><span class="mi" data-pix="zzz" data-scale="3"></span><span class="mt"><b>Battery drops to 4%</b><small>It faints until you plug in</small></span></button>
+              <button type="button" class="move" data-mac="hot" aria-pressed="false"><span class="mi" data-pix="exclaim" data-scale="3"></span><span class="mt"><b>Mac runs hot</b><small>It sweats and slows down</small></span></button>
+              <button type="button" class="move" data-mac="wifi" aria-pressed="false"><span class="mi" data-pix="question" data-scale="3"></span><span class="mt"><b>Drop the Wi-Fi</b><small>Worried, then relieved</small></span></button>
+              <button type="button" class="move" data-mac="camera" aria-pressed="false"><span class="mi" data-pix="window" data-scale="3"></span><span class="mt"><b>Turn the camera on</b><small>Back into the ball for your call</small></span></button>
+              <button type="button" class="move" data-mac="away" aria-pressed="false"><span class="mi" data-pix="zzz" data-scale="3"></span><span class="mt"><b>Step away for 5 minutes</b><small>It curls up and sleeps</small></span></button>
+              <button type="button" class="move" data-mac="music"><span class="mi" data-pix="note" data-scale="3"></span><span class="mt"><b>Music plays</b><small>It dances now and then</small></span></button>
+            </div>
+          </div>
+
+          <div class="panel" id="tab-hooks" role="tabpanel" aria-labelledby="t-hooks" hidden>
+            <span class="label">From a terminal, a git hook or an agent</span>
+            <pre class="term" aria-label="Terminal output, sample" id="termOut"><div class="cmd">$ make test &amp;&amp; pokepets celebrate || pokepets fail</div><div class="dim">(press a button to run it)</div></pre>
+            <div class="chips">
+              <button type="button" class="move chip" data-hook="pass"><span class="mt"><b>Tests pass</b></span></button>
+              <button type="button" class="move chip" data-hook="fail"><span class="mt"><b>Tests fail</b></span></button>
+              <button type="button" class="move chip" data-hook="done"><span class="mt"><b>pokepets done</b></span></button>
+              <button type="button" class="move chip" data-hook="hello"><span class="mt"><b>pokepets hello</b></span></button>
+            </div>
+          </div>
+
+          <div class="battle">
+            <div class="battlebox" id="battlebox" aria-hidden="true"></div>
+            <div class="controls">
+              <button type="button" class="button small" id="stop">Stop</button>
+              <button type="button" class="button small" id="again">Again</button>
+            </div>
+          </div>
+
+          <div class="filesState">
+            <div class="fs-head"><span class="label">Files on the sample desktop</span><button type="button" class="linkbtn" id="restore">Put them all back</button></div>
+            <ul id="fileStates"></ul>
+          </div>
+        </div>
+      </div>
+
+      <details class="transcript">
+        <summary>Transcript <span class="dim">(everything it did and said)</span></summary>
+        <ol id="transcript" aria-live="polite" aria-relevant="additions"></ol>
+      </details>
+    </div>
+
+    <noscript><p class="nojs">The sample desktop needs JavaScript. This is what it looks like: <img src="hero.jpg" alt="Gengar on a Mac desktop, using Shadow Ball" width="640"></p></noscript>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ friction -->
+<section class="band" id="why" aria-labelledby="whyTitle">
+  <div class="sectionHead">
+    <span class="label">The shortcut you already use</span>
+    <h2 id="whyTitle">Deleting a file, with a safety net.</h2>
+    <p>In Finder, <kbd>⌥</kbd><kbd>⌘</kbd><kbd>⌫</kbd> is <em>Delete Immediately</em>. No Trash, no undo. PokéPets takes over that one shortcut (only while Finder is in front) so the same keys do something better.</p>
+  </div>
+  <div class="versus">
+    <article class="vs before">
+      <span class="label">Without it</span>
+      <h3>Delete Immediately</h3>
+      <ol class="steps">
+        <li class="done"><b>Select</b> a file in Finder</li>
+        <li class="done"><b>Press</b> <kbd>⌥⌘⌫</kbd></li>
+        <li class="bad"><b>Gone.</b> Not in the Trash</li>
+      </ol>
+      <p class="fine">Nothing to put back.</p>
+    </article>
+    <article class="vs after">
+      <span class="label">With a Pokémon out</span>
+      <h3>Zapped, then Trashed</h3>
+      <ol class="steps">
+        <li class="done"><b>Select</b> a file in Finder</li>
+        <li class="done"><b>Press</b> <kbd>⌥⌘⌫</kbd>, or ⌥-drag it onto the Pokémon</li>
+        <li class="done"><b>Pikachu</b> Thunderbolts it. <b>Gengar</b> swallows it whole</li>
+        <li class="ok"><b>It lands in the Trash.</b> You can still put it back</li>
+      </ol>
+      <div class="vsActions">
+        <button type="button" class="button primary small" data-demo="zap">Zap a file in the sample</button>
+        <button type="button" class="button small" data-demo="restore">Put it back</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ party -->
+<section class="band" id="party" aria-labelledby="partyTitle">
+  <div class="sectionHead">
+    <span class="label">Meet the party</span>
+    <h2 id="partyTitle">Two lines to raise. Four more on the way.</h2>
+    <p>You raise one line at a time. Every Pokémon starts as an Egg in the menu bar dial. Click it and it hatches; the one already out goes back into its ball.</p>
+  </div>
+
+  <div class="lines">
+    <article class="lineCard" id="line-pichu">
+      <header>
+        <span class="label">#172 → #25 → #26</span>
+        <h3>The Pichu line <span class="type e">Electric</span></h3>
+      </header>
+      <ul class="chain" aria-label="Evolution chain">
+        <li><span class="egg" data-pix="egg" data-scale="4"></span><b>Egg</b><small>menu bar dial</small></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="pichu"><img src="assets/party/pichu.png" width="80" height="80" alt=""><b>Pichu</b><small>friendship 220</small></button></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="pikachu"><img src="assets/party/pikachu.png" width="80" height="80" alt=""><b>Pikachu</b><small>Thunder Stone, Lv 20+</small></button></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="raichu"><img src="assets/party/raichu.png" width="80" height="80" alt=""><b>Raichu</b><small>Kanto</small></button></li>
+        <li class="or" aria-hidden="true">or</li>
+        <li><button type="button" data-send="raichu-alola"><img src="assets/party/raichu-alola.png" width="80" height="80" alt=""><b>Alolan Raichu</b><small>Alola</small></button></li>
+      </ul>
+      <dl class="facts">
+        <div><dt>Ability</dt><dd>Lightning Rod soaks up the charger. Alolan Raichu has Surge Surfer and surfs fast laps while you charge.</dd></div>
+        <div><dt>Climbs</dt><dd>Hops the Dock and desktop files. With Quick Attack it leaps big heights, trailing sparks.</dd></div>
+        <div><dt>Deletes with</dt><dd>Thunder Shock, then Thunderbolt. Bolt from its body to the file's icon.</dd></div>
+        <div><dt>Odd one out</dt><dd>Alolan Raichu rides its tail on psychic power: it never falls, it drifts.</dd></div>
+      </dl>
+    </article>
+
+    <article class="lineCard ghost" id="line-gastly">
+      <header>
+        <span class="label">#92 → #93 → #94</span>
+        <h3>The Gastly line <span class="type g">Ghost / Poison</span></h3>
+      </header>
+      <ul class="chain" aria-label="Evolution chain">
+        <li><span class="egg" data-pix="egg" data-scale="4"></span><b>Egg</b><small>menu bar dial</small></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="gastly"><img src="assets/party/gastly.png" width="80" height="80" alt=""><b>Gastly</b><small>Lv 25, it asks</small></button></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="haunter"><img src="assets/party/haunter.png" width="80" height="80" alt=""><b>Haunter</b><small>Linking Cord</small></button></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><button type="button" data-send="gengar"><img src="assets/party/gengar.png" width="80" height="80" alt=""><b>Gengar</b><small>all the tricks</small></button></li>
+      </ul>
+      <dl class="facts">
+        <div><dt>Ability</dt><dd>Levitate. It is never stuck to the floor: it flies anywhere on your screen and never falls when you drop it.</dd></div>
+        <div><dt>Haunts</dt><dd>Sinks into your front window and peeks out, licks your screen, pops its head up near your cursor.</dd></div>
+        <div><dt>Deletes with</dt><dd>Shadow Ball. It charges one, throws it, and the file is sucked in. The wisp left over floats back to be eaten.</dd></div>
+        <div><dt>After dark</dt><dd>From 7 pm to 6 am, or whenever your Mac is in dark mode: a purple glow and extra mischief.</dd></div>
+      </dl>
+    </article>
+  </div>
+
+  <div class="comingRow" aria-label="Planned Pokémon">
+    <div><span class="locked-q" data-pix="question" data-scale="5"></span><b>Typhlosion</b><small>Fire · planned</small></div>
+    <div><span class="locked-q" data-pix="question" data-scale="5"></span><b>Pidgeot</b><small>Flying · planned</small></div>
+    <div><span class="locked-q" data-pix="question" data-scale="5"></span><b>Alakazam</b><small>Psychic · planned</small></div>
+    <div><span class="locked-q" data-pix="question" data-scale="5"></span><b>Lapras</b><small>Water · planned</small></div>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ gengar tricks -->
+<section class="band tricks" id="tricks" aria-labelledby="tricksTitle">
+  <div class="sectionHead">
+    <span class="label">Gengar, up to no good</span>
+    <h2 id="tricksTitle">Ask for the shadow clones.</h2>
+    <p>Each of these is a real routine from the app, played here with the app's sprites and its own pixel effects. Hit one and Gengar goes and does it on the sample desktop above.</p>
+  </div>
+  <ul class="trickList">
+    <li><button type="button" data-trick="clone"><span data-pix="ghost" data-scale="4"></span><b>Clone</b><small>Two or three dark copies burst out, all grinning. “Which one's the real me?” Sometimes the real one swaps places before they puff away.</small></button></li>
+    <li><button type="button" data-trick="shadowball"><span data-pix="shadowBall" data-scale="4"></span><b>Shadow Ball</b><small>Charged in its hands, thrown at a file. The file spins into the shadow and goes to the Trash. Then it eats the wisp.</small></button></li>
+    <li><button type="button" data-trick="lick"><span data-pix="saliva" data-scale="3"></span><b>Lick</b><small>Leans right up to the glass, licks it a few times, leaves a smear that drips and fades.</small></button></li>
+    <li><button type="button" data-trick="boo"><span data-pix="exclaim" data-scale="4"></span><b>Boo!</b><small>Only its head, rising out of a window edge, grinning.</small></button></li>
+    <li><button type="button" data-trick="phase"><span data-pix="window" data-scale="3"></span><b>Phase</b><small>Sinks into the top of a window, then peeks out somewhere else.</small></button></li>
+    <li><button type="button" data-trick="snatch"><span data-pix="cursor" data-scale="3"></span><b>Steal cursor</b><small>Flies off with a fake one while yours disappears. Move the mouse to get yours back.</small></button></li>
+    <li><button type="button" data-trick="shadowgag"><span data-pix="shade" data-scale="4"></span><b>Its own shadow</b><small>The shadow slips off, blows a raspberry, and they swap places during the chase.</small></button></li>
+    <li><button type="button" data-trick="prank"><span data-pix="handprint" data-scale="3"></span><b>Prank</b><small>Tickles the Dock, tugs at a window that won't budge, or pats ghostly handprints across the screen.</small></button></li>
+  </ul>
+</section>
+
+<!-- ------------------------------------------------------------ life -->
+<section class="band" id="life" aria-labelledby="lifeTitle">
+  <div class="sectionHead">
+    <span class="label">Day to day</span>
+    <h2 id="lifeTitle">What they get up to while you work.</h2>
+  </div>
+  <div class="modules">
+    <article class="mod m1">
+      <span class="mi" data-pix="foot" data-scale="4"></span>
+      <h3>They roam</h3>
+      <p>Along the bottom of the screen, up onto the Dock, across the icons on your desktop. They come over when your cursor does, and stay behind full-screen windows, videos and YouTube. The overlay is click-through: it only catches the mouse when you are actually over a Pokémon.</p>
+      <button type="button" class="button small" data-demo="climb">Show me a climb</button>
+    </article>
+    <article class="mod m2">
+      <span class="mi" data-pix="pecha" data-scale="4"></span>
+      <h3>They need things</h3>
+      <p>Hungry about every half hour; drag a berry onto it. Real EXP curves from Lv 1 to 100, friendship from 0 to 255, 25 natures, a 1 in 4096 shiny roll. Leave it alone for 20 minutes and it sulks. Drop it from a height and it cries.</p>
+      <button type="button" class="button small" data-demo="berry">Feed it a berry</button>
+    </article>
+    <article class="mod m3">
+      <span class="mi" data-pix="sparkle" data-scale="4"></span>
+      <h3>They notice your Mac</h3>
+      <p>Charger, battery, heat, Wi-Fi, your camera, music, and you stepping away for five minutes. At 5% battery it faints until you plug in. Camera on, it goes back in its ball for your call.</p>
+      <button type="button" class="button small" data-demo="mac">Try the Mac tab</button>
+    </article>
+    <article class="mod m4">
+      <span class="mi" data-pix="file" data-scale="4"></span>
+      <h3>They tidy up</h3>
+      <p>The Downloads guard spots files over 500 MB, duplicate copies and installers you are done with, then offers <b>Delete</b> or <b>Keep</b> right in the notification. Once per file, and it never touches anything without a yes.</p>
+      <button type="button" class="button small" data-demo="zap">Zap a file</button>
+    </article>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ control -->
+<section class="band" id="control" aria-labelledby="controlTitle">
+  <div class="sectionHead">
+    <span class="label">You stay in charge</span>
+    <h2 id="controlTitle">It asks. You decide.</h2>
+    <p>A pet that evolves or deletes things on its own would be a worse pet. Two places where it waits for you:</p>
+  </div>
+  <div class="flows">
+    <article class="flow">
+      <h3>Evolving</h3>
+      <ol class="states">
+        <li><b>Egg</b><small>waiting in the dial</small></li>
+        <li><b>Hatches</b><small>when you click it</small></li>
+        <li><b>Grows</b><small>EXP from your company, not battles</small></li>
+        <li class="you"><b>Asks to evolve</b><small>a notification: <u>Evolve</u> or <u>Not Now</u></small></li>
+        <li><b>Evolves</b><small>or asks again next level</small></li>
+      </ol>
+    </article>
+    <article class="flow">
+      <h3>Deleting</h3>
+      <ol class="states">
+        <li><b>On the desktop</b><small>you select it</small></li>
+        <li class="you"><b>You ask</b><small>⌥⌘⌫ or ⌥-drag, never on its own</small></li>
+        <li><b>Zapped</b><small>Thunderbolt or Shadow Ball</small></li>
+        <li><b>In the Trash</b><small>never erased</small></li>
+        <li class="you"><b>Put back</b><small>whenever you like</small></li>
+      </ol>
+    </article>
+  </div>
+  <ul class="promises">
+    <li><b>It never erases.</b> Every delete goes to the Trash, including the Downloads guard's.</li>
+    <li><b>It never evolves unasked.</b> Not Now is always an answer.</li>
+    <li><b>It makes no network requests.</b> No account, no analytics. Everything lives in your Mac's own settings.</li>
+    <li><b>It leaves when you ask.</b> Every permission is optional, and Settings has a switch for every behaviour.</li>
+  </ul>
+</section>
+
+<!-- ------------------------------------------------------------ audiences -->
+<section class="band" id="hooks" aria-labelledby="hooksTitle">
+  <div class="sectionHead">
+    <span class="label">Using it · scripting it · hacking on it</span>
+    <h2 id="hooksTitle">Same app, three ways in.</h2>
+  </div>
+
+  <div class="audience">
+    <div class="tabs wide" id="audTabs" role="tablist" aria-label="Pick how you will use it">
+      <button type="button" role="tab" id="a-use" aria-selected="true" aria-controls="p-use">Using it</button>
+      <button type="button" role="tab" id="a-script" aria-selected="false" aria-controls="p-script" tabindex="-1">Scripting it</button>
+      <button type="button" role="tab" id="a-hack" aria-selected="false" aria-controls="p-hack" tabindex="-1">Hacking on it</button>
+    </div>
+
+    <div class="audPanel" id="p-use" role="tabpanel" aria-labelledby="a-use">
+      <table class="plain">
+        <thead><tr><th scope="col">Do this</th><th scope="col">To get this</th></tr></thead>
+        <tbody>
+          <tr><td>Click the Poké Ball in the menu bar</td><td>Open the party dial: send out or recall, check stats, grab berries and evolution items. Right-click for Settings and Quit.</td></tr>
+          <tr><td>Drag a berry onto your Pokémon</td><td>Feed it. Each one has a favourite and a berry it dislikes.</td></tr>
+          <tr><td>Hover over it</td><td>Pet it. Hearts, and friendship if it is warming to you. Shy natures keep their distance at first.</td></tr>
+          <tr><td>Drag it about, swing it, let go</td><td>Pick it up, make it dizzy, drop it.</td></tr>
+          <tr><td>Select files in Finder, press <kbd>⌥⌘⌫</kbd></td><td>It deletes them into the Trash, with a move.</td></tr>
+          <tr><td>Drag a Thunder Stone or Linking Cord onto it</td><td>Evolve it, once it is ready.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="audPanel" id="p-script" role="tabpanel" aria-labelledby="a-script" hidden>
+      <p>PokéPets answers to a URL scheme, so a script, a git hook or an AI agent can make your Pokémon react. <code>bin/pokepets</code> is a one-line wrapper around <code>open -g pokepets://…</code>.</p>
+      <div class="code"><button type="button" class="copy" data-copy="make && bin/pokepets celebrate || bin/pokepets fail">Copy</button><pre><code>make &amp;&amp; bin/pokepets celebrate || bin/pokepets fail</code></pre></div>
+      <table class="plain">
+        <thead><tr><th scope="col">Command</th><th scope="col">What happens</th><th scope="col">Try it</th></tr></thead>
+        <tbody>
+          <tr><td><code>pokepets celebrate</code></td><td>Build passed: joyous, a Thunder Shock or happy pose</td><td><button type="button" class="linkbtn" data-demo="pass">Run in sample</button></td></tr>
+          <tr><td><code>pokepets fail</code></td><td>Build failed: it faints for a few seconds</td><td><button type="button" class="linkbtn" data-demo="fail">Run in sample</button></td></tr>
+          <tr><td><code>pokepets done</code></td><td>A long job or an agent finished: hearts</td><td><button type="button" class="linkbtn" data-demo="done">Run in sample</button></td></tr>
+          <tr><td><code>pokepets hello</code></td><td>Just says hi</td><td><button type="button" class="linkbtn" data-demo="hello">Run in sample</button></td></tr>
+          <tr><td><code>pokepets focus</code> / <code>unfocus</code></td><td>Goes quiet and sleeps / wakes up. Wire it to a Focus mode with a Shortcuts automation.</td><td><span class="dim">app only</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="audPanel" id="p-hack" role="tabpanel" aria-labelledby="a-hack" hidden>
+      <p>About 8,000 lines of Swift in 19 files, no third-party dependencies. One shared engine; a species is a small subclass with its sprites, moves, ability and evolution rules.</p>
+      <div class="code"><button type="button" class="copy" data-copy="bin/try fly gengar">Copy</button><pre><code>bin/try fly gengar        <span class="c"># relaunch running one demo</span></code></pre></div>
+      <ul class="bullets">
+        <li><b><code>bin/try &lt;demo&gt; &lt;who&gt;</code></b> relaunches the app running one routine (<code>dock</code>, <code>files</code>, <code>levelup</code>, <code>phase</code>, <code>clone</code>, <code>snatch</code>…) so you do not wait for it to decide to.</li>
+        <li><b>Settings › Why?</b> shows the brain: its needs, and the live score of every option it is weighing.</li>
+        <li><b>Settings › Animations</b> plays every SpriteCollab animation in all eight directions, each with an <i>In routine</i> switch.</li>
+        <li><b><code>bin/import-sprites.swift</code></b> imports a Pokémon and its shiny from PMD SpriteCollab and adds the artists to the credits.</li>
+      </ul>
+      <p class="fine">There is no per-frame loop: the walk cycle is a keyframe animation over the sprite sheet, movement is a Core Animation move, and the app wakes only to decide. (This page works the same way, with the Web Animations API.)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ install -->
+<section class="band" id="install" aria-labelledby="installTitle">
+  <div class="sectionHead">
+    <span class="label">Price: free · not for sale</span>
+    <h2 id="installTitle">Install it in one line.</h2>
+    <p>Paste it into Terminal. It downloads PokéPets, checks the file against its published SHA-256, copies it into Applications and opens it. Needs macOS 14 (Sonoma) or later; Apple silicon and Intel Macs both work.</p>
+  </div>
+
+  <div class="audience">
+    <div class="tabs wide" id="instTabs" role="tablist" aria-label="Pick how to install">
+      <button type="button" role="tab" id="i-term-t" aria-selected="true" aria-controls="i-term">Terminal, one line</button>
+      <button type="button" role="tab" id="i-dmg-t" aria-selected="false" aria-controls="i-dmg" tabindex="-1">Download the DMG</button>
+      <button type="button" role="tab" id="i-src-t" aria-selected="false" aria-controls="i-src" tabindex="-1">Build from source</button>
+    </div>
+
+    <div class="audPanel wideP" id="i-term" role="tabpanel" aria-labelledby="i-term-t">
+      <div class="code big"><button type="button" class="copy" data-copy="curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh">Copy</button><pre><code>curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh</code></pre></div>
+      <div class="installCols">
+        <div>
+          <span class="label">What it does</span>
+          <ol class="plainList">
+            <li>Downloads <code>PokePets.dmg</code> and its checksum from this repository.</li>
+            <li><b>Stops if the SHA-256 doesn't match.</b> Nothing is installed.</li>
+            <li>Copies <code>PokePets.app</code> into <code>/Applications</code> (into <code>~/Applications</code> if that isn't writable). An older copy is replaced; your Pokémon are kept.</li>
+            <li>Clears macOS's "downloaded from the internet" mark, so there is no warning, and opens it.</li>
+          </ol>
+          <p class="fine">No <code>sudo</code>, no shell or login-item edits. It is about 80 lines: <a href="install.sh">read it first</a>.</p>
+        </div>
+        <div>
+          <span class="label">Why there is no warning</span>
+          <p>macOS stops anything a <em>browser</em> downloads that Apple hasn't notarized (notarizing costs $99 a year, and PokéPets is free). A file fetched with <code>curl</code> never gets that mark. The warning is the only thing skipped; the checksum is the check that remains.</p>
+          <span class="label">Remove it again</span>
+          <div class="code"><button type="button" class="copy" data-copy="curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/uninstall.sh | sh">Copy</button><pre><code>curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/uninstall.sh | sh</code></pre></div>
+          <p class="fine">Moves the app to the Trash and keeps your Pokémon. Add <code>-s -- --purge</code> after <code>sh</code> to remove them too.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="audPanel wideP" id="i-dmg" role="tabpanel" aria-labelledby="i-dmg-t" hidden>
+      <div class="dlRow">
+        <a class="button primary" href="downloads/PokePets.dmg" data-dmg download>Download PokePets.dmg</a>
+        <span class="fine">Version 1.0 · about 7 MB · macOS 14+ · Apple silicon and Intel · <a href="downloads/PokePets.dmg.sha256">SHA-256</a></span>
+      </div>
+      <h3 class="tableTitle" id="gkTitle">macOS will stop it once. Here is the way through.</h3>
+      <p class="tableNote">PokéPets isn't notarized by Apple, so the first time you open something you downloaded in a browser, macOS says it can't verify it. That is expected. It takes about 30 seconds.</p>
+      <ol class="gk-steps" id="dmgSteps">
+        <li>
+          <span>Open <b>PokePets.dmg</b>. macOS shows this. Click <b>Done</b>, <b>not</b> Move to Bin (it says Move to Trash on a US-English Mac).</span>
+          <div class="macdlg" role="img" aria-label="macOS dialog: “PokePets.dmg” Not Opened. Apple could not verify “PokePets.dmg” is free of malware that may harm your Mac or compromise your privacy. Buttons: Done and Move to Bin.">
+            <svg class="warn" viewBox="0 0 48 44" width="44" height="40" aria-hidden="true"><path d="M24 3 3 41h42z" fill="#e9b948" stroke="#f5f1e6" stroke-width="3" stroke-linejoin="round"/><rect x="22" y="15" width="4" height="14" rx="2" fill="#f5f1e6"/><circle cx="24" cy="34" r="2.4" fill="#f5f1e6"/></svg>
+            <b>“PokePets.dmg” Not Opened</b>
+            <p>Apple could not verify “PokePets.dmg” is free of malware that may harm your Mac or compromise your privacy.</p>
+            <div class="macbtns"><span>Done</span><span class="def">Move to Bin</span></div>
+          </div>
+        </li>
+        <li>
+          <span>Open <b>Apple menu → System Settings → Privacy &amp; Security</b>. Scroll down to <b>Security</b> and click <b>Open Anyway</b>, then enter your Mac password or use Touch ID.</span>
+          <div class="macrow" role="img" aria-label="System Settings, Privacy and Security: “PokePets.dmg” was blocked to protect your Mac. Button: Open Anyway."><span><b>“PokePets.dmg”</b> was blocked to protect your Mac.</span><span class="b">Open Anyway</span></div>
+        </li>
+        <li><span>macOS asks one last time. Click <b>Open</b> (or <b>Open Anyway</b>). Never <b>Move to Bin</b>.</span></li>
+        <li><span>Drag <b>PokePets</b> into Applications and open it. If macOS stops the app itself the same way, repeat steps 2 and 3 once. After that it opens normally.</span></li>
+      </ol>
+      <p class="fine">Prefer Terminal? <code>xattr -dr com.apple.quarantine /Applications/PokePets.app</code> clears the mark on the app, or use the one-line install, which never gets it.</p>
+    </div>
+
+    <div class="audPanel wideP" id="i-src" role="tabpanel" aria-labelledby="i-src-t" hidden>
+      <div class="installGrid">
+        <ol class="installSteps">
+          <li>
+            <b>Get the code</b>
+            <div class="code"><button type="button" class="copy" data-copy="git clone https://github.com/YashTygi/PokePets.git&#10;cd PokePets&#10;open PokePets.xcodeproj">Copy</button><pre><code>git clone https://github.com/YashTygi/PokePets.git
+cd PokePets
+open PokePets.xcodeproj</code></pre></div>
+          </li>
+          <li>
+            <b>Pick your team, press ⌘R</b>
+            <p>In Xcode, select the <b>PokePets</b> target, open <b>Signing &amp; Capabilities</b> and choose your own Team (a free personal one is enough). It needs Xcode 16 or later. The build lands in <code>~/Applications/PokePets.app</code> and launches.</p>
+          </li>
+          <li>
+            <b>Say hello</b>
+            <p>A short welcome guide sets the house rules and asks for each permission one at a time. Then click the Poké Ball in the menu bar and click the Egg.</p>
+          </li>
+        </ol>
+        <aside class="why-signing">
+          <span class="label">Two things that look odd</span>
+          <p><b>Why <code>~/Applications</code>?</b> macOS only offers the notification prompt to apps that live in an Applications folder, so the project builds straight there.</p>
+          <p><b>Why sign with a team?</b> A real signing identity keeps your Accessibility and Automation grants across rebuilds. Ad-hoc signing makes macOS forget them every time. (The DMG is ad-hoc signed, so after an update you grant them once more.)</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="tableTitle" id="perms">What it asks of your Mac</h3>
+  <p class="tableNote">Every permission is optional, and each one is asked for once, with the reason, by the welcome guide.</p>
+  <div class="tableWrap">
+    <table class="plain perms">
+      <thead><tr><th scope="col">Permission</th><th scope="col">What it is for</th><th scope="col">If you say no</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Notifications</th><td>Level-ups, hunger, evolution prompts, the Downloads guard</td><td>They stay quiet; captions still show</td></tr>
+        <tr><th scope="row">Automation → Finder</th><td>Finds your desktop files so it can climb them</td><td>No file climbing</td></tr>
+        <tr><th scope="row">Automation → your browser</th><td>Notices a YouTube video so it stays out of the way</td><td>It will not hide for YouTube in that browser</td></tr>
+        <tr><th scope="row"><a href="#faq-accessibility">Accessibility</a></th><td>Aims the Thunderbolt at the file's exact icon</td><td>Files still go to the Trash, aimed less precisely</td></tr>
+        <tr><th scope="row">Files &amp; Folders → Downloads</th><td>The <a href="#faq-trash">Downloads guard</a></td><td>The guard stays off</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<dialog class="gk" id="gk" aria-labelledby="gk-title">
+  <div class="gk-in">
+    <h3 id="gk-title" tabindex="-1" autofocus>Downloading the DMG: one extra step</h3>
+    <p class="why">PokéPets is free, so it isn't notarized by Apple (that costs $99 a year). The first time you open the download, macOS stops it once. Here is how to let it through. It takes about 30 seconds.</p>
+    <div id="gk-steps"></div>
+    <div class="gk-alt"><b>Want to skip all of this?</b> Paste this into Terminal instead. It checks the download and installs PokéPets with no prompts.
+      <div class="code"><button type="button" class="copy" data-copy="curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh">Copy</button><pre><code>curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/install.sh | sh</code></pre></div></div>
+    <div class="acts">
+      <button type="button" class="button" id="gk-close">Close</button>
+      <a class="button primary" id="gk-go" href="downloads/PokePets.dmg" download>Got it, download PokePets.dmg</a>
+    </div>
+  </div>
+</dialog>
+
+<!-- ------------------------------------------------------------ faq -->
+<section class="band" id="faq" aria-labelledby="faqTitle">
+  <div class="sectionHead">
+    <span class="label">Questions</span>
+    <h2 id="faqTitle">The honest answers.</h2>
+  </div>
+  <div class="faq">
+    <details id="faq-trash"><summary>Can it delete something I wanted to keep?</summary><div><p>It only deletes what you point it at (select files in Finder and press ⌥⌘⌫, or ⌥-drop them on it) or what you say yes to in a Downloads guard notification. Every delete goes to the Trash, never erased, so you can put it back. While the delete move is on, PokéPets takes over only the ⌥⌘⌫ shortcut, and only while Finder is in front. You can switch the move off in Settings.</p></div></details>
+    <details id="faq-accessibility"><summary>Why does it want Accessibility?</summary><div><p>Only to see where Finder draws a file's icon, so the Thunderbolt or Shadow Ball lands on it. Without it, deleting still works, just aimed less precisely. It is optional and the app explains it before asking.</p></div></details>
+    <details id="faq-battery"><summary>Will it eat my battery?</summary><div><p>It is built not to: no per-frame loop, one see-through window, sensors that wake it only when something changes (the charger, Wi-Fi, heat, a file landing in Downloads). Two small timers do run: an idle check every 20 seconds, and, while it is allowed to walk over your apps, a look every 2 seconds at whether the front app is full screen. I have not published CPU or memory measurements yet, so I am not going to put a number on it.</p></div></details>
+    <details id="faq-displays"><summary>Does it work on more than one display?</summary><div><p>Not yet. Today the Pokémon live on your main display.</p></div></details>
+    <details id="faq-download"><summary>Where is the download?</summary><div><p>Use the one-line Terminal install, or download <a href="downloads/PokePets.dmg" data-dmg>PokePets.dmg</a> (about 7 MB, Apple silicon and Intel). Both are in this repository, and the script checks the DMG's SHA-256 before it installs anything. Details are in <a href="#install">Install</a>.</p></div></details>
+    <details id="faq-gatekeeper"><summary>Why does macOS say it can't verify PokéPets?</summary><div><p>Apple only waves through apps it has notarized, and notarizing needs a paid developer account ($99 a year). PokéPets is free, so a DMG you download in a browser is stopped once. Click <b>Done</b> (not Move to Bin), then open <b>System Settings → Privacy &amp; Security</b>, scroll to <b>Security</b> and click <b>Open Anyway</b>. The steps are on the <a href="#i-dmg-t" data-install-tab="i-dmg-t">DMG tab</a>. The one-line install avoids the prompt, because <code>curl</code> downloads aren't marked.</p></div></details>
+    <details id="faq-script"><summary>Is it safe to paste that into Terminal?</summary><div><p>It is a sensible thing to ask. <a href="install.sh">install.sh</a> is short enough to read in a couple of minutes. It downloads two files from this repository, refuses to continue unless the SHA-256 matches, copies the app to Applications, clears macOS's downloaded-from-the-internet mark from that copy, and opens it. It never uses <code>sudo</code> and doesn't touch your shell settings. The app itself is open source in the same repository, so you can build it yourself instead.</p></div></details>
+    <details id="faq-uninstall"><summary>How do I uninstall it?</summary><div><p>Paste <code>curl -fsSL https://raw.githubusercontent.com/YashTygi/PokePets/main/docs/uninstall.sh | sh</code> into Terminal. It quits PokéPets and moves the app to the Trash, and keeps your Pokémon so a reinstall brings them back. Add <code>-s -- --purge</code> after <code>sh</code> to remove their save and settings and reset the permissions you gave it. Or just drag PokePets from Applications to the Trash.</p></div></details>
+    <details id="faq-more"><summary>When do Typhlosion, Pidgeot, Alakazam and Lapras arrive?</summary><div><p>They already have slots in the party screen and are planned, but nothing is built. The two lines here are finished enough to live with, and I would rather get them right first.</p></div></details>
+    <details id="faq-network"><summary>Does it phone home?</summary><div><p>No. The app makes no network requests, has no account and no analytics. The Pokémon data (learnsets, growth rates, natures, Pokédex text) is baked in, and your party is saved in your Mac's own settings.</p></div></details>
+    <details id="faq-official"><summary>Is this official?</summary><div><p>No. Pokémon and its characters belong to Nintendo, Creatures Inc. and GAME FREAK inc. PokéPets is an unofficial, non-commercial fan project, not affiliated with or endorsed by them, and it is not for sale. Some of the sprites are CC BY-NC 4.0, so keep it that way if you fork it.</p></div></details>
+    <details id="faq-sample"><summary>Is the sample above the real app?</summary><div><p>It is the real sprites, move lists, lines and pixel effects, rebuilt for the browser so you can poke at them. The app itself runs on your actual desktop, with real files and real sensors. The charger, battery and Wi-Fi in the sample are pretend.</p></div></details>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="footGrid">
+    <div>
+      <a class="brand" href="#top"><img src="icon.png" width="28" height="28" alt="">PokéPets</a>
+      <p>Pokémon that live on your Mac desktop. A fan project, made for the fun of it.</p>
+    </div>
+    <div>
+      <span class="label">Project</span>
+      <ul>
+        <li><a href="downloads/PokePets.dmg" data-dmg download>Download PokePets.dmg</a></li>
+        <li><a href="install.sh">install.sh</a></li>
+        <li><a href="https://github.com/YashTygi/PokePets">Source on GitHub</a></li>
+        <li><a href="https://github.com/YashTygi/PokePets#readme">README</a></li>
+        <li><a href="https://github.com/YashTygi/PokePets/blob/main/CREDITS.md">Credits</a></li>
+        <li><a href="https://github.com/YashTygi/PokePets/issues">Issues</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Thanks to</span>
+      <ul>
+        <li><a href="https://sprites.pmdcollab.org">PMD SpriteCollab</a> and every artist in it</li>
+        <li><a href="https://pokeapi.co">PokéAPI</a> for the data</li>
+      </ul>
+    </div>
+  </div>
+  <p class="legal">Pokémon and Pokémon character names are © Nintendo, Creatures Inc. and GAME FREAK inc. PokéPets is an unofficial, non-commercial fan project. It is not affiliated with or endorsed by them, and it is not for sale. The egg, berries, evolution items, Poké Ball, hearts and sparks are pixel art made for PokéPets.</p>
+</footer>
+
+<div id="roam" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="shade-filter" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.17  0 0 0 0 0.06  0 0 0 0 0.27  0 0 0 1 0"/></filter>
+</svg>
+
+<script src="assets/sheets.js"></script>
+<script src="assets/pixels.js"></script>
+<script src="assets/engine.js"></script>
+<script src="assets/moves.js"></script>
+<script src="assets/stage.js"></script>
+<script src="assets/roamer.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
